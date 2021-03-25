@@ -3,8 +3,15 @@
     ID : <input id='userid' type='text'/><br>
 </form>
 <p>
-    <button>차 목록 관리</button>
+    <button (click)="click()">차 목록 관리</button>
 </p>
+<table class="type01">
+    <tr *ngFor="let _car of car">
+        <td>{{ _car.carId }}</td>
+        <td>{{ _car.carName }}</td>
+        <td>{{ _car.company }}</td>
+    </tr>
+</table>
 <p>
     <button>유저 목록 관리</button>
 </p>
