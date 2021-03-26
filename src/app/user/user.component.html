@@ -1,10 +1,46 @@
 <p>렌탈 시스템 사용자</p>
 <form>
-    ID : <input id='userid' type='text'/><br>
+    사용자 ID : <input #nameInput id='userid' type='text'><br>
 </form>
 <p>
-    <button>렌트 가능한 차 정보 확인</button>
+    <button (click) = "checkUser()">현재 상태 확인</button>
 </p>
+<pre>{{rentedInfo |json}}</pre>
 <p>
-    <button>현재 빌린차 확인</button>
+    <button (click) = "getUsableCar()">렌트 가능한 차 정보 확인</button>
 </p>
+<table class="usableCar">
+    <thead>
+        <tr>
+          <th scope="cols">car_id</th>
+          <th scope="cols">car_name</th>
+          <th scope="cols">company</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let _car of usableCar">
+            <td>{{ _car.carId }}</td>
+            <td>{{ _car.carName }}</td>
+            <td>{{ _car.company }}</td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    <button (click) = "getRentedCar()"> 현재 빌린차 확인</button>
+</p>
+<table class="rentedCar">
+    <thead>
+        <tr>
+          <th scope="cols">car_id</th>
+          <th scope="cols">car_name</th>
+          <th scope="cols">company</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let _car of rentedCar">
+            <td>{{ _car.carId }}</td>
+            <td>{{ _car.carName }}</td>
+            <td>{{ _car.company }}</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,51 @@
+  table.usableCar thead {
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    background: #e7708d;
+  }
+  table.usableCar thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #fff;
+  }
+  table.usableCar tbody th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #fcf1f4;
+  }
+  table.usableCar td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+  }
+
+  table.rentedCar thead {
+    border-right: 1px solid #ccc;
+    border-left: 1px solid #ccc;
+    background: #e7708d;
+  }
+  table.rentedCar thead th {
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #fff;
+  }
+  table.rentedCar tbody th {
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+    background: #fcf1f4;
+  }
+  table.rentedCar td {
+    width: 350px;
+    padding: 10px;
+    vertical-align: top;
+    border-bottom: 1px solid #ccc;
+  }

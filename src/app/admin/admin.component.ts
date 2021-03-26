@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CatServiceService } from '../cat-service.service';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -9,12 +8,10 @@ import { CatServiceService } from '../cat-service.service';
 })
 export class AdminComponent implements OnInit {
 
-
-  carUrl = '/car';
   car: Observable<any>;
-
   
-  constructor(private api:CatServiceService, private httpclient:HttpClient) { 
+  
+  constructor(private httpclient:HttpClient) { 
     document.title = "admin"
   } 
  
@@ -32,6 +29,7 @@ export class AdminComponent implements OnInit {
   click(){
     console.log(this.car);
   }
+  
 
 }
 
