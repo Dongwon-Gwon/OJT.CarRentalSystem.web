@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -15,10 +15,12 @@ export class UserComponent implements OnInit {
   rentedInfo: Observable<any>;
   userInfo: Observable<any>;
   state: string;
-  
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
   
   @ViewChild("nameInput") userId: ElementRef;
-  
+  @ViewChild("carId") carId: ElementRef;
   
   constructor(private httpclient:HttpClient) { 
   }
@@ -39,14 +41,13 @@ export class UserComponent implements OnInit {
   checkUser(): void{
     this.rentedUser().subscribe((data) => {this.rentedInfo = data});
     this.enrolledUser().subscribe((data) => {this.userInfo = data});
-    console.log(this.userInfo);
     let info;
     let id = this.userId.nativeElement.value;
     setTimeout(() => {
       info = Object.values(this.rentedInfo);
 
       for(let i=0;i<info.length;i++) {
-        if(id == info[i]['id']) {
+        if(id == info[i]['userId']) {
           this.state = "렌트 중인 회원";
           this.getRentedCar();
           this.usableCar = null;
@@ -68,7 +69,7 @@ export class UserComponent implements OnInit {
       this.usableCar = null;
       this.rentedCar = null;
       return
-    }, 1000);
+    }, 500);
  
   }
 
@@ -89,4 +90,47 @@ export class UserComponent implements OnInit {
   getRentedCar(): void {
     this.getRentedCarInfo().subscribe((data) => {this.rentedCar = data});
   }
+
+  rentCarPipe(): Observable<any>{
+    if(this.state != "렌트 가능한 회원") {
+      return
+    }
+
+    let posCar = Object.values(this.usableCar);
+    for(let i=0;i<posCar.length;i++) {
+      let carId = this.carId.nativeElement.value;
+      if(carId == posCar[i]["carId"]) {
+        let enrollInfo = {
+          "id": 99999999999,
+          "carId": Number(carId),
+          "userId": Number(this.userId.nativeElement.value)
+        };
+        return this.httpclient.put("http://localhost:8080/rentalinfo", enrollInfo, this.httpOptions).pipe();        
+      }
+    }
+    return 
+  }
+
+  rentCar():void{
+    this.rentCarPipe().subscribe();
+    setTimeout(() => {
+      this.checkUser();
+    },500)
+
+  }
+
+  returnCarPipe(): Observable<any>{
+    if(this.state != "렌트 중인 회원"){
+      return 
+    }
+    return this.httpclient.delete("http://localhost:8080/user/"+this.userId.nativeElement.value+"/rentalinfo").pipe();
+  }
+
+  returnCar(): void{
+    this.returnCarPipe().subscribe();
+    setTimeout(() => {
+      this.checkUser();
+    },500)
+  }
+
 }

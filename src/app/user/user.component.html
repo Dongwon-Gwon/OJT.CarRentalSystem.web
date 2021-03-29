@@ -3,7 +3,7 @@
     사용자 ID : <input #nameInput id='userid' type='text'>
     <button (click) = "checkUser()">현재 상태 확인</button>
 </form>
-<pre>{{ state }}</pre>
+<h2>{{ state }}</h2>
 <h3>렌트 가능한 차</h3>
 <table class="usableCar">
     <thead>
@@ -22,8 +22,8 @@
     </tbody>
 </table>
 <p>
-    car_id: <input #nameInput id='carid' type='text'>
-    <button> 렌트하기</button>
+    car_id: <input #carId id='carid' type='text'>
+    <button (click) = 'rentCar()'> 렌트하기</button>
 </p>
 <h3>렌트 한 차</h3>
 <table class="rentedCar">
@@ -43,5 +43,5 @@
     </tbody>
 </table>
 <p>
-    <button> 반납하기</button>
+    <button (click)="returnCar()" > 반납하기</button>
 </p>
