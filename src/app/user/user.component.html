@@ -1,14 +1,10 @@
 <p>렌탈 시스템 사용자</p>
 <form>
-    사용자 ID : <input #nameInput id='userid' type='text'><br>
-</form>
-<p>
+    사용자 ID : <input #nameInput id='userid' type='text'>
     <button (click) = "checkUser()">현재 상태 확인</button>
-</p>
-<pre>{{rentedInfo |json}}</pre>
-<p>
-    <button (click) = "getUsableCar()">렌트 가능한 차 정보 확인</button>
-</p>
+</form>
+<pre>{{ state }}</pre>
+<h3>렌트 가능한 차</h3>
 <table class="usableCar">
     <thead>
         <tr>
@@ -26,8 +22,10 @@
     </tbody>
 </table>
 <p>
-    <button (click) = "getRentedCar()"> 현재 빌린차 확인</button>
+    car_id: <input #nameInput id='carid' type='text'>
+    <button> 렌트하기</button>
 </p>
+<h3>렌트 한 차</h3>
 <table class="rentedCar">
     <thead>
         <tr>
@@ -44,3 +42,6 @@
         </tr>
     </tbody>
 </table>
+<p>
+    <button> 반납하기</button>
+</p>

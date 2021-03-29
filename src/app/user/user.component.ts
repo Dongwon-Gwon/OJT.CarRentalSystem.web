@@ -13,7 +13,12 @@ export class UserComponent implements OnInit {
   rentedCar: Observable<any>;
   check: Observable<any>;
   rentedInfo: Observable<any>;
+  userInfo: Observable<any>;
+  state: string;
+  
+  
   @ViewChild("nameInput") userId: ElementRef;
+  
   
   constructor(private httpclient:HttpClient) { 
   }
@@ -21,16 +26,50 @@ export class UserComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  checkUser(): void{
+  rentedUser():Observable<any> {
     this.url = "http://localhost:8080/rentalinfo";
-    this.check = this.httpclient.get(this.url).pipe();
-    this.check.subscribe((data) => {this.rentedInfo = data});
-    
-    // console.log(this.rentedInfo)
-    // for( value: Object.values(this.rentedInfo)){
+    return this.httpclient.get(this.url).pipe();
+  }
 
-    // }
-    console.log(Object.values(this.rentedInfo))
+  enrolledUser():Observable<any> {
+    this.url = "http://localhost:8080/user";
+    return this.httpclient.get(this.url).pipe();
+  }
+
+  checkUser(): void{
+    this.rentedUser().subscribe((data) => {this.rentedInfo = data});
+    this.enrolledUser().subscribe((data) => {this.userInfo = data});
+    console.log(this.userInfo);
+    let info;
+    let id = this.userId.nativeElement.value;
+    setTimeout(() => {
+      info = Object.values(this.rentedInfo);
+
+      for(let i=0;i<info.length;i++) {
+        if(id == info[i]['id']) {
+          this.state = "렌트 중인 회원";
+          this.getRentedCar();
+          this.usableCar = null;
+          return
+        }
+      }
+
+      info = Object.values(this.userInfo);
+      for(let i=0;i<info.length;i++) {
+        if(id == info[i]['userId']) {
+          this.state = "렌트 가능한 회원";
+          this.getUsableCar();
+          this.rentedCar = null;
+          return
+        }
+      }
+
+      this.state = "존재하지 않는 회원"
+      this.usableCar = null;
+      this.rentedCar = null;
+      return
+    }, 1000);
+ 
   }
 
   getUsableCarInfo(): Observable<any> {
