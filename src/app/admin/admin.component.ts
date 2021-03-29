@@ -16,6 +16,7 @@ export class AdminComponent implements OnInit {
   adminState: string;
   info:any;
   conif =0;
+  con = "";
 
   @ViewChild("nameInput") adminId: ElementRef;
 
@@ -58,4 +59,16 @@ export class AdminComponent implements OnInit {
   
   }
 
+  conCar(){
+    this.con="car"
+  }
+  conUser(){
+    this.con="user"
+  }
+  conAdmin(){
+    this.con="admin"
+  }
+  conRentalInfo() {
+    this.con="rentalinfo"
+  }
 }
