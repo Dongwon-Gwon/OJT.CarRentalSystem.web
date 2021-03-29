@@ -15,6 +15,7 @@ export class AdminComponent implements OnInit {
   adminCheck: Observable<any>;
   adminState: string;
   info:any;
+  conif =0;
 
   @ViewChild("nameInput") adminId: ElementRef;
 
@@ -48,9 +49,11 @@ export class AdminComponent implements OnInit {
         this.getInfo("user").subscribe((data) => {this.user = data});
         this.getInfo("rentalinfo").subscribe((data) => {this.rentInfo = data});
         this.getInfo("admin").subscribe((data) => {this.admin = data});
+        this.conif =1;
         return
       }
     }
+    this.conif=0;
     this.adminState = "관리자 권한이 없습니다";
   
   }

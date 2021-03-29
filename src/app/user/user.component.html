@@ -1,47 +1,51 @@
-<p>렌탈 시스템 사용자</p>
+<h3>렌탈 시스템 사용자</h3>
 <form>
     사용자 ID : <input #nameInput id='userid' type='text'>
     <button (click) = "checkUser()">현재 상태 확인</button>
 </form>
-<h2>{{ state }}</h2>
-<h3>렌트 가능한 차</h3>
-<table class="usableCar">
-    <thead>
-        <tr>
-          <th scope="cols">car_id</th>
-          <th scope="cols">car_name</th>
-          <th scope="cols">company</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let _car of usableCar">
-            <td>{{ _car.carId }}</td>
-            <td>{{ _car.carName }}</td>
-            <td>{{ _car.company }}</td>
-        </tr>
-    </tbody>
-</table>
-<p>
-    car_id: <input #carId id='carid' type='text'>
-    <button (click) = 'rentCar()'> 렌트하기</button>
-</p>
-<h3>렌트 한 차</h3>
-<table class="rentedCar">
-    <thead>
-        <tr>
-          <th scope="cols">car_id</th>
-          <th scope="cols">car_name</th>
-          <th scope="cols">company</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let _car of rentedCar">
-            <td>{{ _car.carId }}</td>
-            <td>{{ _car.carName }}</td>
-            <td>{{ _car.company }}</td>
-        </tr>
-    </tbody>
-</table>
-<p>
-    <button (click)="returnCar()" > 반납하기</button>
-</p>
+<p>현재 상태 : {{ state }}</p>
+<ng-container *ngIf="conif==2">
+    <h3>렌트 가능한 차</h3>
+    <table class="usableCar">
+        <thead>
+            <tr>
+            <th scope="cols">car_id</th>
+            <th scope="cols">car_name</th>
+            <th scope="cols">company</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let _car of usableCar">
+                <td>{{ _car.carId }}</td>
+                <td>{{ _car.carName }}</td>
+                <td>{{ _car.company }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        car_id: <input #carId id='carid' type='text'>
+        <button (click) = 'rentCar()'> 렌트하기</button>
+    </p>
+</ng-container>
+<ng-container *ngIf="conif==1">
+    <h3>렌트 한 차</h3>
+    <table class="rentedCar">
+        <thead>
+            <tr>
+            <th scope="cols">car_id</th>
+            <th scope="cols">car_name</th>
+            <th scope="cols">company</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let _car of rentedCar">
+                <td>{{ _car.carId }}</td>
+                <td>{{ _car.carName }}</td>
+                <td>{{ _car.company }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>
+        <button (click)="returnCar()" > 반납하기</button>
+    </p>
+</ng-container>

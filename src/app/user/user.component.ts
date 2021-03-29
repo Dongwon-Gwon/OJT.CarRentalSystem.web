@@ -18,7 +18,7 @@ export class UserComponent implements OnInit {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  
+  conif =3;
   @ViewChild("nameInput") userId: ElementRef;
   @ViewChild("carId") carId: ElementRef;
   
@@ -49,6 +49,7 @@ export class UserComponent implements OnInit {
       for(let i=0;i<info.length;i++) {
         if(id == info[i]['userId']) {
           this.state = "렌트 중인 회원";
+          this.conif =1;
           this.getRentedCar();
           this.usableCar = null;
           return
@@ -59,6 +60,7 @@ export class UserComponent implements OnInit {
       for(let i=0;i<info.length;i++) {
         if(id == info[i]['userId']) {
           this.state = "렌트 가능한 회원";
+          this.conif =2;
           this.getUsableCar();
           this.rentedCar = null;
           return
@@ -66,6 +68,7 @@ export class UserComponent implements OnInit {
       }
 
       this.state = "존재하지 않는 회원"
+      this.conif =3;
       this.usableCar = null;
       this.rentedCar = null;
       return
