@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 @Component({
@@ -17,8 +17,18 @@ export class AdminComponent implements OnInit {
   info:any;
   conif =0;
   con = "";
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
-  @ViewChild("nameInput") adminId: ElementRef;
+  @ViewChild("checkAdminId") checkAdminId: ElementRef;
+  @ViewChild("carName") carName: ElementRef;
+  @ViewChild("company") company: ElementRef;
+  @ViewChild("carId") carId: ElementRef;
+  @ViewChild("userName") userName: ElementRef;
+  @ViewChild("userId") userId: ElementRef;
+  @ViewChild("adminName") adminName: ElementRef;
+  @ViewChild("adminId") adminId: ElementRef;
 
   constructor(private httpclient:HttpClient) { 
     document.title = "admin"
@@ -36,7 +46,7 @@ export class AdminComponent implements OnInit {
   
   click(){
     this.info = Object.values(this.adminCheck);
-    let id = this.adminId.nativeElement.value;
+    let id = this.checkAdminId.nativeElement.value;
 
     this.car = null;
     this.user = null;
@@ -60,7 +70,7 @@ export class AdminComponent implements OnInit {
   }
 
   conCar(){
-    this.con="car"
+    this.con='car'
   }
   conUser(){
     this.con="user"
@@ -70,5 +80,84 @@ export class AdminComponent implements OnInit {
   }
   conRentalInfo() {
     this.con="rentalinfo"
+  }
+
+  saveCarPipe(): Observable<any>{
+    let car = {
+      "carId": 99999999,
+      "carName": this.carName.nativeElement.value,
+      "company": this.company.nativeElement.value
+    }
+    return this.httpclient.put("http://localhost:8080/car",car,this.httpOptions).pipe()
+  }
+
+  saveCar(){
+    this.saveCarPipe().subscribe();
+    setTimeout(() => {
+      this.click();
+    },500)
+  }
+  
+  deleteCarPipe(): Observable<any>{
+    return this.httpclient.delete("http://localhost:8080/car/" + this.carId.nativeElement.value).pipe()
+  }
+
+  deleteCar(){
+    this.deleteCarPipe().subscribe();
+    setTimeout(() => {
+      this.click();
+    },500)
+  }
+
+  saveUserPipe(): Observable<any>{
+    let user ={
+      "userId": 99999999,
+      "userName": this.userName.nativeElement.value 
+    }
+    return this.httpclient.put("http://localhost:8080/user",user,this.httpOptions).pipe();
+  }
+
+  saveUser(){
+    this.saveUserPipe().subscribe();
+    setTimeout(() => {
+      this.click();
+    },500)
+  }
+
+  deleteUserPipe(): Observable<any>{
+    return this.httpclient.delete("http://localhost:8080/user/"+this.userId.nativeElement.value).pipe()
+  }
+
+  deleteUser(){
+    this.deleteUserPipe().subscribe();
+    setTimeout(() => {
+      this.click();
+    },500)
+  }
+
+  saveAdminPipe(): Observable<any> {
+    let admin ={
+      "userId": 99999999,
+      "adminName": this.adminName.nativeElement.value 
+    }
+    return this.httpclient.put("http://localhost:8080/admin",admin,this.httpOptions).pipe();
+  }
+
+  saveAdmin(){
+    this.saveAdminPipe().subscribe();
+    setTimeout(() => {
+      this.click();
+    },500)
+  }
+
+  deleteAdminPipe(): Observable<any> {
+    return this.httpclient.delete("http://localhost:8080/admin/"+this.adminId.nativeElement.value).pipe()
+  }
+
+  deleteAdmin(){
+    this.deleteAdminPipe().subscribe();
+    setTimeout(() => {
+      this.click();
+    },500)
   }
 }

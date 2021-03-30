@@ -1,6 +1,6 @@
 <h3>렌탈 시스템 관리자</h3>
 <form>
-    관리자 ID : <input #nameInput id='adminid' type='text'>
+    관리자 ID : <input #checkAdminId type='text'>
     <button (click) = "click()">조회</button>
 </form>
 <h2>{{ adminState }}</h2>
@@ -30,11 +30,11 @@
         <p>
             car_name : <input #carName type='text'> 
             company: <input #company type='text'>
-            <button>등록</button>
+            <button (click) = 'saveCar()'>등록</button>
         </p>
         <p>
             car_id : <input #carId type='text'> 
-            <button>제거</button>
+            <button (click)='deleteCar()'>제거</button>
         </p>
     </ng-container>
     <ng-container *ngIf="con=='user'">
@@ -55,11 +55,11 @@
         </table>
         <p>
             user_name : <input #userName type='text'> 
-            <button>등록</button>
+            <button (click)='saveUser()'>등록</button>
         </p>
         <p>
-            user_id : <input #carId type='text'> 
-            <button>제거</button>
+            user_id : <input #userId type='text'> 
+            <button (click)='deleteUser()'>제거</button>
         </p>
     </ng-container>
     <ng-container *ngIf="con=='admin'">
@@ -80,11 +80,11 @@
         </table>
         <p>
             admin_name : <input #adminName type='text'> 
-            <button>등록</button>
+            <button (click)='saveAdmin()'>등록</button>
         </p>
         <p>
-            admin_id : <input #carId type='text'> 
-            <button>제거</button>
+            admin_id : <input #adminId type='text'> 
+            <button (click)='deleteAdmin()'>제거</button>
         </p>
     </ng-container>
     <ng-container *ngIf="con=='rentalinfo'">
