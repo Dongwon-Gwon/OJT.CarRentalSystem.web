@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
+import { url } from 'src/app/environment/environment';
 
 @Component({
   selector: 'app-user',
@@ -8,7 +9,6 @@ import { Observable } from 'rxjs';
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  url: string;
   usableCar: Observable<any>;
   rentedCar: Observable<any>;
   check: Observable<any>;
@@ -18,6 +18,7 @@ export class UserComponent implements OnInit {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
+  url = url;
   conif =3;
   @ViewChild("nameInput") userId: ElementRef;
   @ViewChild("carId") carId: ElementRef;
@@ -29,13 +30,11 @@ export class UserComponent implements OnInit {
   }
 
   rentedUser():Observable<any> {
-    this.url = "http://localhost:8080/rentalinfo";
-    return this.httpclient.get(this.url).pipe();
+    return this.httpclient.get(`${this.url}/rentalinfo`).pipe();
   }
 
   enrolledUser():Observable<any> {
-    this.url = "http://localhost:8080/user";
-    return this.httpclient.get(this.url).pipe();
+    return this.httpclient.get(`${this.url}/user`).pipe();
   }
 
   checkUser(): void{
@@ -77,8 +76,7 @@ export class UserComponent implements OnInit {
   }
 
   getUsableCarInfo(): Observable<any> {
-    this.url = "http://localhost:8080/user/"+this.userId.nativeElement.value+"/car";
-    return this.httpclient.get(this.url).pipe();
+    return this.httpclient.get(`${this.url}/user/${this.userId.nativeElement.value}/car`).pipe();
   }
   
   getUsableCar(): void {
@@ -86,8 +84,7 @@ export class UserComponent implements OnInit {
   }
 
   getRentedCarInfo(): Observable<any>{
-    this.url = "http://localhost:8080/user/"+this.userId.nativeElement.value+"/rent";
-    return this.httpclient.get(this.url).pipe();
+    return this.httpclient.get(`${this.url}/user/${this.userId.nativeElement.value}/rent`).pipe();
   }
 
   getRentedCar(): void {
@@ -108,7 +105,7 @@ export class UserComponent implements OnInit {
           "carId": Number(carId),
           "userId": Number(this.userId.nativeElement.value)
         };
-        return this.httpclient.put("http://localhost:8080/rentalinfo", enrollInfo, this.httpOptions).pipe();        
+        return this.httpclient.put(`${this.url}/rentalinfo`, enrollInfo, this.httpOptions).pipe();        
       }
     }
     return 
@@ -126,7 +123,7 @@ export class UserComponent implements OnInit {
     if(this.state != "렌트 중인 회원"){
       return 
     }
-    return this.httpclient.delete("http://localhost:8080/user/"+this.userId.nativeElement.value+"/rentalinfo").pipe();
+    return this.httpclient.delete(`${this.url}/user/${this.userId.nativeElement.value}/rentalinfo`).pipe();
   }
 
   returnCar(): void{
