@@ -1,1 +1,4 @@
-export const url= "http://backend-service:8080";
+export class DataService{
+    
+    url= `http://${location.host}/`;
+}

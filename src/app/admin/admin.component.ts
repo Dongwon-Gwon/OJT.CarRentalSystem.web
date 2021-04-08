@@ -1,13 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
-import { url } from 'src/app/environment/environment';
+import { DataService } from 'src/app/environment/environment';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent implements OnInit {
+export class AdminComponent extends DataService implements OnInit {
 
   car: Observable<any>;
   user: Observable<any>;
@@ -18,7 +18,7 @@ export class AdminComponent implements OnInit {
   info:any;
   conif =0;
   con = "";
-  url = url;
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -33,6 +33,7 @@ export class AdminComponent implements OnInit {
   @ViewChild("adminId") adminId: ElementRef;
 
   constructor(private httpclient:HttpClient) { 
+    super();
     document.title = "admin"
   } 
  
@@ -43,7 +44,7 @@ export class AdminComponent implements OnInit {
   }
   
   getInfo(obj: string): Observable<any> {
-    return this.httpclient.get(`${this.url}/${obj}`).pipe();
+    return this.httpclient.get(`${this.url}${obj}`).pipe();
   }
   
   click(){
@@ -90,7 +91,7 @@ export class AdminComponent implements OnInit {
       "carName": this.carName.nativeElement.value,
       "company": this.company.nativeElement.value
     }
-    return this.httpclient.put(`${this.url}/car`, car, this.httpOptions).pipe();
+    return this.httpclient.put(`${this.url}car`, car, this.httpOptions).pipe();
   }
 
   saveCar(){
@@ -101,7 +102,7 @@ export class AdminComponent implements OnInit {
   }
   
   deleteCarPipe(): Observable<any>{
-    return this.httpclient.delete(`${this.url}/car/${this.carId.nativeElement.value}`).pipe()
+    return this.httpclient.delete(`${this.url}car/${this.carId.nativeElement.value}`).pipe()
   }
 
   deleteCar(){
@@ -116,7 +117,7 @@ export class AdminComponent implements OnInit {
       "userId": 99999999,
       "userName": this.userName.nativeElement.value 
     }
-    return this.httpclient.put(`${this.url}/user`, user, this.httpOptions).pipe();
+    return this.httpclient.put(`${this.url}user`, user, this.httpOptions).pipe();
   }
 
   saveUser(){
@@ -127,7 +128,7 @@ export class AdminComponent implements OnInit {
   }
 
   deleteUserPipe(): Observable<any>{
-    return this.httpclient.delete(`${this.url}/user/${this.userId.nativeElement.value}`).pipe();
+    return this.httpclient.delete(`${this.url}user/${this.userId.nativeElement.value}`).pipe();
   }
 
   deleteUser(){
@@ -142,7 +143,7 @@ export class AdminComponent implements OnInit {
       "userId": 99999999,
       "adminName": this.adminName.nativeElement.value 
     }
-    return this.httpclient.put(`${this.url}/admin`, admin, this.httpOptions).pipe();
+    return this.httpclient.put(`${this.url}admin`, admin, this.httpOptions).pipe();
   }
 
   saveAdmin(){
@@ -153,7 +154,7 @@ export class AdminComponent implements OnInit {
   }
 
   deleteAdminPipe(): Observable<any> {
-    return this.httpclient.delete(`${this.url}/admin/${this.adminId.nativeElement.value}`).pipe()
+    return this.httpclient.delete(`${this.url}admin/${this.adminId.nativeElement.value}`).pipe()
   }
 
   deleteAdmin(){
