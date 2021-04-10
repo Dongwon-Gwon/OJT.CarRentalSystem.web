@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { DataService } from './environment/environment';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,7 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

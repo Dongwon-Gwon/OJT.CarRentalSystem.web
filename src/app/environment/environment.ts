@@ -1,4 +1,7 @@
+import { Injectable } from "@angular/core";
+
+@Injectable()
 export class DataService{
     
-    url= `http://${location.host}/`;
+    url= `http://${location.host}/api/`;
 }

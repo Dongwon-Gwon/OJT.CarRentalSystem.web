@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: "sosdong/ojt-frontend:0.3"
+          image: "gcr.io/accu-platform/modeler-ojt-web:tag14"
           lifecycle:
             preStop:
               exec:
