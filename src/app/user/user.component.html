@@ -9,9 +9,9 @@
     <table class="usableCar">
         <thead>
             <tr>
-            <th scope="cols">car_id</th>
-            <th scope="cols">car_name</th>
-            <th scope="cols">company</th>
+            <th scope="cols">자동차 ID</th>
+            <th scope="cols">자동차 이름</th>
+            <th scope="cols">제조회사</th>
             </tr>
         </thead>
         <tbody>
@@ -23,18 +23,18 @@
         </tbody>
     </table>
     <p>
-        car_id: <input #carId id='carid' type='text'>
+        자동차 ID : <input #carId id='carid' type='text'>
         <button (click) = 'rentCar()'> 렌트하기</button>
     </p>
 </ng-container>
 <ng-container *ngIf="conif==1">
-    <h3>렌트 한 차</h3>
+    <h3>렌트 중인 자동차</h3>
     <table class="rentedCar">
         <thead>
             <tr>
-            <th scope="cols">car_id</th>
-            <th scope="cols">car_name</th>
-            <th scope="cols">company</th>
+            <th scope="cols">자동차 ID</th>
+            <th scope="cols">자동차 이름</th>
+            <th scope="cols">제조회사</th>
             </tr>
         </thead>
         <tbody>

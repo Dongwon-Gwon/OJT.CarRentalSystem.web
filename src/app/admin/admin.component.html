@@ -5,18 +5,18 @@
 </form>
 <h2>{{ adminState }}</h2>
 <ng-container *ngIf="conif==1">
-<button (click) = "conCar()">차 목록 관리</button>
-<button (click) = "conUser()">유저 목록 관리</button>
+<button (click) = "conCar()">자동차 목록 관리</button>
+<button (click) = "conUser()">사용자 목록 관리</button>
 <button (click) = "conAdmin()">관리자 정보 관리</button>
 <button (click) = "conRentalInfo()">렌탈 정보 확인</button>
     <ng-container *ngIf="con=='car'">
-        <h3>차 목록 관리</h3>
+        <h3>자동차 목록 관리</h3>
         <table class="carType">
             <thead>
                 <tr>
-                    <th scope="cols">car_id</th>
-                    <th scope="cols">car_name</th>
-                    <th scope="cols">company</th>
+                    <th scope="cols">자동차 ID</th>
+                    <th scope="cols">자동차 이름</th>
+                    <th scope="cols">제조회사</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,12 +28,12 @@
             </tbody>
         </table>
         <p>
-            car_name : <input #carName type='text'> 
-            company: <input #company type='text'>
+            자동차 이름 : <input #carName type='text'> 
+            제조 회사 : <input #company type='text'>
             <button (click) = 'saveCar()'>등록</button>
         </p>
         <p>
-            car_id : <input #carId type='text'> 
+            자동차 ID : <input #carId type='text'> 
             <button (click)='deleteCar()'>제거</button>
         </p>
     </ng-container>
@@ -42,8 +42,8 @@
         <table class="carType">
             <thead>
                 <tr>
-                    <th scope="cols">user_id</th>
-                    <th scope="cols">user_name</th>
+                    <th scope="cols">사용자 ID</th>
+                    <th scope="cols">사용자 이름</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,11 +54,11 @@
             </tbody>
         </table>
         <p>
-            user_name : <input #userName type='text'> 
+            사용자 이름 : <input #userName type='text'> 
             <button (click)='saveUser()'>등록</button>
         </p>
         <p>
-            user_id : <input #userId type='text'> 
+            사용자 ID : <input #userId type='text'> 
             <button (click)='deleteUser()'>제거</button>
         </p>
     </ng-container>
@@ -67,8 +67,8 @@
         <table class="carType">
             <thead>
                 <tr>
-                    <th scope="cols">admin_id</th>
-                    <th scope="cols">admin_name</th>
+                    <th scope="cols">관리자 ID</th>
+                    <th scope="cols">관리자 이름</th>
                 </tr>
             </thead>
             <tbody>
@@ -79,11 +79,11 @@
             </tbody>
         </table>
         <p>
-            admin_name : <input #adminName type='text'> 
+            관리자 이름 : <input #adminName type='text'> 
             <button (click)='saveAdmin()'>등록</button>
         </p>
         <p>
-            admin_id : <input #adminId type='text'> 
+            관리자 ID : <input #adminId type='text'> 
             <button (click)='deleteAdmin()'>제거</button>
         </p>
     </ng-container>
@@ -92,9 +92,9 @@
         <table class="carType">
             <thead>
                 <tr>
-                    <th scope="cols">id</th>
-                    <th scope="cols">user_id</th>
-                    <th scope="cols">car_id</th>
+                    <th scope="cols">렌트번호</th>
+                    <th scope="cols">사용자 ID</th>
+                    <th scope="cols">자동차 ID</th>
                 </tr>
             </thead>
             <tbody>
